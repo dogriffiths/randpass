@@ -8,9 +8,37 @@
 #include <time.h>
 #include "randpass.h"
 
+int main(int argc, char *argv[])
+{
+  int c;
+  int (*char_maker)(int);
+  int random_fd = open("/dev/random", O_RDONLY);
+  int i;
+  char_maker = numbersCharsAndSymbols;
+  
+  while ( (c = getopt(argc, argv, "a")) != -1) {
+    int this_option_optind = optind ? optind : 1;
+    switch (c) {
+    case 'a':
+      char_maker = numbersAndChars;
+      break;
+    default:
+      printf ("Unknown option: %c\nUsage:\n\trandpass [-c]\n", c);
+    }
+  }
+  
+  for (i = 0; i < 32; i++) {
+    int r;
+    read(random_fd, &r, sizeof r);
+    printf("%c", char_maker(r));
+  }
+  printf("\n");
+  close(random_fd);
+  return 0;
+}
+
 int numbersAndChars(int x)
 {
-  // 48-57 65-90 and 97-122
   int y = (abs(x) % 62) + 48;
   if (y > 90) {
     y += 7;
@@ -23,33 +51,4 @@ int numbersAndChars(int x)
 int numbersCharsAndSymbols(int x)
 {
   return (abs(x) % 93) + 33;
-}
-
-int main(int argc, char *argv[])
-{
-  int c;
-  int (*charMaker)(int);
-  int randomData = open("/dev/random", O_RDONLY);
-  int i;
-  charMaker = numbersCharsAndSymbols;
-  
-  while ( (c = getopt(argc, argv, "c")) != -1) {
-    int this_option_optind = optind ? optind : 1;
-    switch (c) {
-    case 'c':
-      charMaker = numbersAndChars;
-      break;
-    default:
-      printf ("Unknown option: %c\nUsage:\n\trandpass [-c]\n", c);
-    }
-  }
-  
-  for (i = 0; i < 32; i++) {
-    int myRandomInteger;
-    read(randomData, &myRandomInteger, sizeof myRandomInteger);
-    printf("%c", charMaker(myRandomInteger));
-  }
-  printf("\n");
-  close(randomData);
-  return 0;
 }
