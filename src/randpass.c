@@ -6,6 +6,7 @@
 #include <unistd.h>
 #include <getopt.h>
 #include <time.h>
+#include <sys/fcntl.h>
 #include "randpass.h"
 #include "../config.h"
 
@@ -14,9 +15,34 @@ void usage()
   fprintf(stderr, "Usage:\n\trandpass [-avh]\n");
 }
 
+void print_seq(int char_length, int (*char_maker)(int))
+{
+  int i, r;
+  srand(time(NULL));
+  for (i = 0; i < char_length; i++) {
+    r = rand() % 256;
+    printf("%c", char_maker(r));
+  }
+  printf("\n");
+}
+
+void print_seq_dev_random(int char_length, int (*char_maker)(int))
+{
+  int random_fd = open("/dev/random", O_RDONLY);
+  int i, r;
+  srand(time(NULL));
+  for (i = 0; i < char_length; i++) {
+    int r;
+    read(random_fd, &r, sizeof r);
+    printf("%c", char_maker(r));
+  }
+  printf("\n");
+  close(random_fd);
+}
+
 int main(int argc, char *argv[])
 {
-  int i, r, c;
+  int c;
   int char_length = 32;
   int (*char_maker)(int) = numbersCharsAndSymbols;
   
@@ -45,12 +71,7 @@ int main(int argc, char *argv[])
     }
   }
   
-  srand(time(NULL));
-  for (i = 0; i < char_length; i++) {
-    r = rand() % 256;
-    printf("%c", char_maker(r));
-  }
-  printf("\n");
+  print_seq_dev_random(char_length, char_maker);
   return 0;
 }
 
