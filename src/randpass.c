@@ -10,11 +10,19 @@
 #include "randpass.h"
 #include "../config.h"
 
+#ifdef __APPLE__
+  #define DEVRANDOM "/dev/random"
+#endif
+#ifdef __linux
+  #define DEVRANDOM "/dev/urandom"
+#endif
+
 void usage()
 {
   fprintf(stderr, "Usage:\n\trandpass [-avh]\n");
 }
 
+#ifndef DEVRANDOM
 void print_seq(int char_length, int (*char_maker)(int))
 {
   int i, r;
@@ -25,20 +33,20 @@ void print_seq(int char_length, int (*char_maker)(int))
   }
   printf("\n");
 }
-
-void print_seq_dev_random(int char_length, int (*char_maker)(int))
+#else
+void print_seq(int char_length, int (*char_maker)(int))
 {
-  int random_fd = open("/dev/urandom", O_RDONLY);
+  int random_fd = open(DEVRANDOM, O_RDONLY);
   int i, r;
   srand(time(NULL));
   for (i = 0; i < char_length; i++) {
-    int r;
     read(random_fd, &r, sizeof r);
     printf("%c", char_maker(r));
   }
   printf("\n");
   close(random_fd);
 }
+#endif
 
 int main(int argc, char *argv[])
 {
@@ -52,7 +60,11 @@ int main(int argc, char *argv[])
       char_maker = numbersAndChars;
       break;
     case 'v':
+#ifdef DEVRANDOM
+      fprintf(stderr, "%s using %s\n", PACKAGE_STRING, DEVRANDOM);
+#else
       fprintf(stderr, "%s\n", PACKAGE_STRING);
+#endif
       exit(0);
     case 'h':
       usage();
@@ -71,7 +83,7 @@ int main(int argc, char *argv[])
     }
   }
   
-  print_seq_dev_random(char_length, char_maker);
+  print_seq(char_length, char_maker);
   return 0;
 }
 
