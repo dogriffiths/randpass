@@ -7,6 +7,12 @@
 #include <unistd.h>
 #include <time.h>
 #include "randpass.h"
+#include "../config.h"
+
+void usage()
+{
+  fprintf(stderr, "Usage:\n\trandpass [-avh]\n");
+}
 
 int main(int argc, char *argv[])
 {
@@ -16,14 +22,21 @@ int main(int argc, char *argv[])
   int i;
   char_maker = numbersCharsAndSymbols;
   
-  while ( (c = getopt(argc, argv, "a")) != -1) {
-    int this_option_optind = optind ? optind : 1;
+  while ( (c = getopt(argc, argv, "avh")) != -1) {
     switch (c) {
     case 'a':
       char_maker = numbersAndChars;
       break;
+    case 'v':
+      fprintf(stderr, "%s\n", PACKAGE_STRING);
+      exit(0);
+    case 'h':
+      usage();
+      exit(0);
     default:
-      printf ("Unknown option: %c\nUsage:\n\trandpass [-c]\n", c);
+      fprintf(stderr, "%s\nUnknown option: %c\n", PACKAGE_STRING, c);
+      usage();
+      exit(1);
     }
   }
   
