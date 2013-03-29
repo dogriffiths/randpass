@@ -19,4 +19,4 @@ AC_CHECK_HEADERS([stdlib.h unistd.h])
 
 # Checks for library functions.
 
-AC_OUTPUT(Makefile src/Makefile)
+AC_OUTPUT(Makefile src/Makefile man/Makefile)

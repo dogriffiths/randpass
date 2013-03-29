@@ -20,9 +20,10 @@ int main(int argc, char *argv[])
   int (*char_maker)(int);
   int random_fd = open("/dev/random", O_RDONLY);
   int i;
+  int char_length = 32;
   char_maker = numbersCharsAndSymbols;
   
-  while ( (c = getopt(argc, argv, "avh")) != -1) {
+  while ( (c = getopt(argc, argv, "avhn:")) != -1) {
     switch (c) {
     case 'a':
       char_maker = numbersAndChars;
@@ -33,6 +34,13 @@ int main(int argc, char *argv[])
     case 'h':
       usage();
       exit(0);
+    case 'n':
+      char_length = atoi(optarg);
+      if (char_length < 1) {
+        fprintf(stderr, "Must produce at least one character\n");
+        exit(1);
+      }
+      break;
     default:
       fprintf(stderr, "%s\nUnknown option: %c\n", PACKAGE_STRING, c);
       usage();
@@ -40,7 +48,7 @@ int main(int argc, char *argv[])
     }
   }
   
-  for (i = 0; i < 32; i++) {
+  for (i = 0; i < char_length; i++) {
     int r;
     read(random_fd, &r, sizeof r);
     printf("%c", char_maker(r));
