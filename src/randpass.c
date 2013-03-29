@@ -40,7 +40,7 @@ void print_seq(int char_length, int (*char_maker)(int))
   int i, r;
   srand(time(NULL));
   for (i = 0; i < char_length; i++) {
-    if (read(random_fd, &r, sizeof r) == -1)
+    if (read(random_fd, &r, sizeof r) != -1)
       printf("%c", char_maker(r));
     else {
       fprintf(stderr, "Unable to read from %s\n", DEVRANDOM);
