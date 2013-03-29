@@ -3,7 +3,6 @@
 
 #include <stdio.h>
 #include <stdlib.h>
-#include <sys/fcntl.h>
 #include <unistd.h>
 #include <getopt.h>
 #include <time.h>
@@ -17,12 +16,9 @@ void usage()
 
 int main(int argc, char *argv[])
 {
-  int c;
-  int (*char_maker)(int);
-  int random_fd = open("/dev/random", O_RDONLY);
-  int i;
+  int i, r, c;
   int char_length = 32;
-  char_maker = numbersCharsAndSymbols;
+  int (*char_maker)(int) = numbersCharsAndSymbols;
   
   while ( (c = getopt(argc, argv, "avhn:")) != -1) {
     switch (c) {
@@ -49,13 +45,12 @@ int main(int argc, char *argv[])
     }
   }
   
+  srand(time(NULL));
   for (i = 0; i < char_length; i++) {
-    int r;
-    read(random_fd, &r, sizeof r);
+    r = rand() % 256;
     printf("%c", char_maker(r));
   }
   printf("\n");
-  close(random_fd);
   return 0;
 }
 
