@@ -2020,6 +2020,9 @@ ac_link='$CC -o conftest$ac_exeext $CFLAGS $CPPFLAGS $LDFLAGS conftest.$ac_ext $
 ac_compiler_gnu=$ac_cv_c_compiler_gnu
 
 
+
+ac_config_headers="$ac_config_headers config.h"
+
 am__api_version='1.13'
 
 ac_aux_dir=
@@ -2580,9 +2583,6 @@ am__tar='$${TAR-tar} chof - "$$tardir"' am__untar='$${TAR-tar} xf -'
 
 
 
-
-
-ac_config_headers="$ac_config_headers config.h"
 
 
 # Checks for programs.
