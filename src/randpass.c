@@ -5,6 +5,7 @@
 #include <stdlib.h>
 #include <sys/fcntl.h>
 #include <unistd.h>
+#include <getopt.h>
 #include <time.h>
 #include "randpass.h"
 #include "../config.h"
