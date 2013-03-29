@@ -2,9 +2,10 @@
 # Process this file with autoconf to produce a configure script.
 
 AC_PREREQ([2.69])
-AC_INIT([FULL-PACKAGE-NAME], [VERSION], [BUG-REPORT-ADDRESS])
-AC_CONFIG_SRCDIR([randpass.c])
+AC_INIT([randpass], [1.0])
+AC_CONFIG_SRCDIR([src/randpass.c])
 AC_CONFIG_HEADERS([config.h])
+AM_INIT_AUTOMAKE
 
 # Checks for programs.
 AC_PROG_CC
@@ -18,4 +19,4 @@ AC_CHECK_HEADERS([stdlib.h unistd.h])
 
 # Checks for library functions.
 
-AC_OUTPUT
+AC_OUTPUT(Makefile src/Makefile)
