@@ -28,7 +28,7 @@ void print_seq(int char_length, int (*char_maker)(int))
 
 void print_seq_dev_random(int char_length, int (*char_maker)(int))
 {
-  int random_fd = open("/dev/random", O_RDONLY);
+  int random_fd = open("/dev/urandom", O_RDONLY);
   int i, r;
   srand(time(NULL));
   for (i = 0; i < char_length; i++) {
