@@ -33,14 +33,14 @@ Options:
 
 ## Using randpass to disguise your network connection
 
-You can use randpass if you want to change your MAC address to a random value. This can be useful if you want to use a public wifi network and don't want leak information about your hardware. This is an example of how to do that on a Mac:
+You can use randpass if you want to change your MAC address to a random value. This can be useful if you want to use a public wifi network and don't want leak information about your hardware. This is an example of how to do that on a *nix machine:
 
-First, close your existing wifi connection:
+First, close your existing wifi connection. Either do this manually or with a script. On a Mac running Mountain Lion you can use:
 
      $ sudo /System/Library/PrivateFrameworks/Apple80211.framework/Versions/A/Resources/airport -z
 
-Then, change your Mac address using randpass:
+Then, change your Mac address using randpass. This command sets the MAC address of the en1 network connection:
 
      $ sudo ifconfig en1 ether $(randpass -m)
 
-You will then need to connect to the network. The network will treat your machine as a different piece of hardware and allocate you a new IP address. You MAC address will be reset if you reboot.
+The en1 connection will typically be your WiFi, but you an check by just typing 'ifconfig'. You will then need to re-connect to the network. The network will treat your machine as a different piece of hardware and allocate you a new IP address. You MAC address will be reset if you reboot.
