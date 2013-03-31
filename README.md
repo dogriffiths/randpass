@@ -39,8 +39,8 @@ First, close your existing wifi connection. Either do this manually or with a sc
 
      $ sudo /System/Library/PrivateFrameworks/Apple80211.framework/Versions/A/Resources/airport -z
 
-Then, change your Mac address using randpass. This command sets the MAC address of the en1 network connection:
+Then, change your MAC address using randpass. This command sets the MAC address of the en1 network connection:
 
      $ sudo ifconfig en1 ether $(randpass -m)
 
-The en1 connection will typically be your WiFi, but you an check by just typing 'ifconfig'. You will then need to re-connect to the network. The network will treat your machine as a different piece of hardware and allocate you a new IP address. You MAC address will be reset if you reboot.
+The en1 connection will typically be your WiFi, but you can check by just typing 'ifconfig'. You will then need to re-connect to the network. The network will treat your machine as a different piece of hardware and allocate you a new IP address. You MAC address will be reset if you reboot.
