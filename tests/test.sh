@@ -43,7 +43,11 @@ testCanGenerateJustAlphaNumerics()
   assertEquals "Generated non-alphanumerics" $(../src/randpass -a | tr 'A-Za-z0-9' ' ' | sed 's/ //g' | awk '{print length}') 0
 }
 
-
+testCanGenerateRandomMACAddressWithTheMOption()
+{
+  export P1=$(../src/randpass -m)
+  assertTrue "'$P1' is not a valid MAC address" "[[ $P1 =~ ^([0-9a-f]{2}[:-]){5}([0-9a-f]{2})$ ]]"
+}
 
 # load shunit2
 . shunit2

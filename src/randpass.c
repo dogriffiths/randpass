@@ -35,6 +35,34 @@ void print_seq_rand_lib(int char_length, int (*char_maker)(int))
   printf("\n");
 }
 
+void print_seq_rand_dev(int char_length, int (*char_maker)(int))
+{
+  int i, r;
+  struct timeval t1;
+  gettimeofday(&t1, NULL);
+  srand(t1.tv_usec * t1.tv_sec);
+  for (i = 0; i < char_length; i++) {
+    r = rand() % 256;
+    printf("%c", char_maker(r));
+  }
+  printf("\n");
+}
+
+void print_mac_address()
+{
+  int i, r;
+  struct timeval t1;
+  gettimeofday(&t1, NULL);
+  srand(t1.tv_usec * t1.tv_sec);
+  r = rand() % 16;
+  printf("%x2", r);
+  for (i = 0; i < 5; i++) {
+    r = rand() % 16;
+    printf(":%x2", r);
+  }
+  printf("\n");
+}
+
 #ifndef DEVRANDOM
 void print_seq(int char_length, int (*char_maker)(int))
 {
@@ -64,8 +92,9 @@ int main(int argc, char *argv[])
   int char_length = 32;
   int (*char_maker)(int) = numbersCharsAndSymbols;
   int use_randlib = 0;
+  int mac_address = 0;
   
-  while ((c = getopt(argc, argv, "ravhn:")) != -1) {
+  while ((c = getopt(argc, argv, "ravhn:m")) != -1) {
     switch (c) {
     case 'a':
       char_maker = numbersAndChars;
@@ -83,6 +112,9 @@ int main(int argc, char *argv[])
     case 'r':
       use_randlib = 1;
       break;
+    case 'm':
+      mac_address = 1;
+      break;
     case 'n':
       char_length = atoi(optarg);
       if (char_length < 1) {
@@ -97,7 +129,9 @@ int main(int argc, char *argv[])
     }
   }
   
-  if (use_randlib)
+  if (mac_address)
+    print_mac_address();
+  else if (use_randlib)
     print_seq_rand_lib(char_length, char_maker);
   else
     print_seq(char_length, char_maker);
