@@ -2,7 +2,7 @@
 .SH NAME
 randpass - generate a random password
 .SH SYNOPSIS
-.B randpass [-ravh] [-n<num>]
+.B randpass [-mravh] [-n<num>]
 .SH AVAILABILITY
 Mac OSX
 .SH DESCRIPTION
@@ -24,5 +24,7 @@ Display usage
 Specify the length of the password
 -r
 Force the use of the rand() call, rather than using /dev/random or /dev/urandom. Primarily useful for testing.
+-m
+Generate a random MAC address, e.g. 12:72:e2:b2:62:02
 .SH AUTHOR
 David Griffiths

@@ -14,6 +14,8 @@ Options:
 
  -r Force the use of the rand() call, rather than using /dev/random or /dev/urandom. Primarily useful for testing.
 
+ -m Generate a random MAC address, e.g. 12:72:e2:b2:62:02
+
 # Examples
 
     $ randpass
@@ -26,4 +28,17 @@ Options:
     EXTebO9TEPMh445cAXhgYD3i4ABfV6ES
     $ randpass -an15
     4qCeooDmF0KjI0I
-    $
+    $ randpass -m
+    52:72:72:f2:d2:a2
+
+You can use randpass if you want to change your MAC address to a random value. This can be useful if you want to use a public wifi network and don't want leak information about your hardware. This is an example of how to do that on a Mac:
+
+First, close your existing wifi connection:
+
+     $ sudo /System/Library/PrivateFrameworks/Apple80211.framework/Versions/A/Resources/airport -z
+
+Then, change your Mac address using randpass:
+
+     $ sudo ifconfig en1 ether $(randpass -m)
+
+You will then need to connect to the network. The network will treat your machine as a different piece of hardware and allocate you a new IP address. You MAC address will be reset if you reboot.
