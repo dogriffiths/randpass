@@ -3,3 +3,5 @@ all:
 
 check:
 	./test.sh
+
+install:
