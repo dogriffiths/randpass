@@ -31,6 +31,8 @@ Options:
     $ randpass -m
     52:72:72:f2:d2:a2
 
+## Using randpass to disguise your network connection
+
 You can use randpass if you want to change your MAC address to a random value. This can be useful if you want to use a public wifi network and don't want leak information about your hardware. This is an example of how to do that on a Mac:
 
 First, close your existing wifi connection:
