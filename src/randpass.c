@@ -46,14 +46,13 @@ void print_seq(int char_length, int (*char_maker)(int))
   int random_fd = open(DEVRANDOM, O_RDONLY);
   int i, r;
   srand(time(NULL));
-  for (i = 0; i < char_length; i++) {
+  for (i = 0; i < char_length; i++)
     if (read(random_fd, &r, sizeof r) != -1)
       printf("%c", char_maker(r));
     else {
       fprintf(stderr, "Unable to read from %s\n", DEVRANDOM);
       exit(1);
     }
-  }
   printf("\n");
   close(random_fd);
 }
@@ -66,7 +65,7 @@ int main(int argc, char *argv[])
   int (*char_maker)(int) = numbersCharsAndSymbols;
   int use_randlib = 0;
   
-  while ( (c = getopt(argc, argv, "ravhn:")) != -1) {
+  while ((c = getopt(argc, argv, "ravhn:")) != -1) {
     switch (c) {
     case 'a':
       char_maker = numbersAndChars;
@@ -109,11 +108,10 @@ int main(int argc, char *argv[])
 int numbersAndChars(int x)
 {
   int y = (abs(x) % 62) + 48;
-  if (y > 90) {
+  if (y > 90)
     y += 7;
-  } else if ((y > 57) && (y < 65)) {
+  else if ((y > 57) && (y < 65))
     y += 7;
-  }
   return y;
 }
 
