@@ -18,17 +18,17 @@ Options:
 
 # Examples
 
-    $ randpass
+    $ randpass                             # Generate a random password
     nqkTNY4A"lG)4ss?_%`<YS'Fj:<{sz|%
-    $ randpass -n50
+    $ randpass -n50                        # Generate a 50 char password
     Z$>Fh%Vu%if.O`x[RuzFV?LsirlKA4\zB%5Exq#zyu}f}&|_LS
-    $ randpass -n7
+    $ randpass -n7                         # Generate a 7 char password
     bcXJQ_g
-    $ randpass -a
+    $ randpass -a                          # Generate an alphanumeric password
     EXTebO9TEPMh445cAXhgYD3i4ABfV6ES
-    $ randpass -an15
+    $ randpass -an15                       # Generate a 15 char alphanumeric
     4qCeooDmF0KjI0I
-    $ randpass -m
+    $ randpass -m                          # Generate a random MAC address
     52:72:72:f2:d2:a2
 
 ## Using randpass to disguise your network connection
