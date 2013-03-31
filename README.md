@@ -12,6 +12,8 @@ Options:
 
  -n<num> Specify the number of characters in the password
 
+ -r Force the use of the rand() call, rather than using /dev/random or /dev/urandom. Primarily useful for testing.
+
 # Examples
 
     $ randpass

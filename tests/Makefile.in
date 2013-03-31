@@ -1,0 +1,5 @@
+all:
+	echo "Run all"
+
+check:
+	./test.sh

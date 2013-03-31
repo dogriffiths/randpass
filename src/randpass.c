@@ -5,7 +5,7 @@
 #include <stdlib.h>
 #include <unistd.h>
 #include <getopt.h>
-#include <time.h>
+#include <sys/time.h>
 #include <sys/fcntl.h>
 #include "randpass.h"
 #include "../config.h"
@@ -19,19 +19,26 @@
 
 void usage()
 {
-  fprintf(stderr, "Usage:\n\trandpass [-avh]\n");
+  fprintf(stderr, "Usage:\n\trandpass [-ravh] [-n <num>]\n");
 }
 
-#ifndef DEVRANDOM
-void print_seq(int char_length, int (*char_maker)(int))
+void print_seq_rand_lib(int char_length, int (*char_maker)(int))
 {
   int i, r;
-  srand(time(NULL));
+  struct timeval t1;
+  gettimeofday(&t1, NULL);
+  srand(t1.tv_usec * t1.tv_sec);
   for (i = 0; i < char_length; i++) {
     r = rand() % 256;
     printf("%c", char_maker(r));
   }
   printf("\n");
+}
+
+#ifndef DEVRANDOM
+void print_seq(int char_length, int (*char_maker)(int))
+{
+  print_seq_rand_lib(char_length, char_maker);
 }
 #else
 void print_seq(int char_length, int (*char_maker)(int))
@@ -57,8 +64,9 @@ int main(int argc, char *argv[])
   int c;
   int char_length = 32;
   int (*char_maker)(int) = numbersCharsAndSymbols;
+  int use_randlib = 0;
   
-  while ( (c = getopt(argc, argv, "avhn:")) != -1) {
+  while ( (c = getopt(argc, argv, "ravhn:")) != -1) {
     switch (c) {
     case 'a':
       char_maker = numbersAndChars;
@@ -73,6 +81,9 @@ int main(int argc, char *argv[])
     case 'h':
       usage();
       exit(0);
+    case 'r':
+      use_randlib = 1;
+      break;
     case 'n':
       char_length = atoi(optarg);
       if (char_length < 1) {
@@ -87,7 +98,11 @@ int main(int argc, char *argv[])
     }
   }
   
-  print_seq(char_length, char_maker);
+  if (use_randlib)
+    print_seq_rand_lib(char_length, char_maker);
+  else
+    print_seq(char_length, char_maker);
+
   return 0;
 }
 

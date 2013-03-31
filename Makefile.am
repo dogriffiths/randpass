@@ -1,2 +1,2 @@
 UTOMAKE_OPTIONS = foreign
-SUBDIRS = src man
+SUBDIRS = src man tests

@@ -3762,7 +3762,7 @@ fi
 done
 
 
-for ac_header in stdlib.h unistd.h getopt.h time.h
+for ac_header in stdlib.h unistd.h getopt.h sys/time.h
 do :
   as_ac_Header=`$as_echo "ac_cv_header_$ac_header" | $as_tr_sh`
 ac_fn_c_check_header_mongrel "$LINENO" "$ac_header" "$as_ac_Header" "$ac_includes_default"
@@ -3780,7 +3780,7 @@ done
 
 # Checks for library functions.
 
-ac_config_files="$ac_config_files Makefile src/Makefile man/Makefile"
+ac_config_files="$ac_config_files Makefile src/Makefile man/Makefile tests/Makefile"
 
 cat >confcache <<\_ACEOF
 # This file is a shell script that caches the results of configure
@@ -4494,6 +4494,7 @@ do
     "Makefile") CONFIG_FILES="$CONFIG_FILES Makefile" ;;
     "src/Makefile") CONFIG_FILES="$CONFIG_FILES src/Makefile" ;;
     "man/Makefile") CONFIG_FILES="$CONFIG_FILES man/Makefile" ;;
+    "tests/Makefile") CONFIG_FILES="$CONFIG_FILES tests/Makefile" ;;
 
   *) as_fn_error $? "invalid argument: \`$ac_config_target'" "$LINENO" 5;;
   esac

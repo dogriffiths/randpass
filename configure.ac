@@ -13,10 +13,10 @@ AC_PROG_CC
 # Checks for libraries.
 
 # Checks for header files.
-AC_CHECK_HEADERS([stdlib.h unistd.h getopt.h time.h])
+AC_CHECK_HEADERS([stdlib.h unistd.h getopt.h sys/time.h])
 
 # Checks for typedefs, structures, and compiler characteristics.
 
 # Checks for library functions.
 
-AC_OUTPUT(Makefile src/Makefile man/Makefile)
+AC_OUTPUT(Makefile src/Makefile man/Makefile tests/Makefile)
