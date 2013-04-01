@@ -14,7 +14,7 @@ Options:
 
  -r Force the use of the rand() call, rather than using /dev/random or /dev/urandom. Primarily useful for testing.
 
- -m Generate a random MAC address, e.g. 12:72:e2:b2:62:02
+ -m Generate a random MAC address, e.g. d2:85:e6:6b:3c:d9
 
 # Examples
 
@@ -29,7 +29,7 @@ Options:
     $ randpass -an15                       # Generate a 15 char alphanumeric
     4qCeooDmF0KjI0I
     $ randpass -m                          # Generate a random MAC address
-    22:0c:0d:0d:03:06
+    72:a8:d6:8c:49:3e
 
 ## Using randpass to spoof your MAC address
 

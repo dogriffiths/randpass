@@ -57,7 +57,7 @@ void print_mac_address()
   r = rand() % 16;
   printf("%x2", r);
   for (i = 0; i < 5; i++) {
-    r = rand() % 16;
+    r = rand() % 256;
     printf(":%02x", r);
   }
   printf("\n");
