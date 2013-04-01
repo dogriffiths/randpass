@@ -8,8 +8,8 @@ Mac OSX, Linux
 .SH DESCRIPTION
 randpass generates a string of characters that are suitable for use as passwords. By default, passwords are generated using letters,
 symbols and numbers.
-.SH MAC SPOOFING
-You can use randpass if you want to change your MAC address to a random value. This can be useful if you want to use a public wifi network and don't want leak information about your hardware. This is an example of how to do that on a *nix machine:
+.SH NOTES
+You can use randpass to spoof your MAC address. This can be useful if you want to use a public wifi network and don't want leak information about your hardware. This is an example of how to do that on a *nix machine:
 
 First, close your existing wifi connection. Either do this manually or with a script. On a Mac running Mountain Lion you can use:
 
@@ -27,6 +27,9 @@ For more on MAC spoofing see https://en.wikipedia.org/wiki/MAC_spoofing
 -a
 Generate a password using only alpha-numeric characters.
 .TP 5
+-m
+Generate a random MAC address
+.TP 5
 -v
 Display the version number
 .TP 5
@@ -36,23 +39,48 @@ Display usage
 -n
 .I char-num
 Specify the length of the password
+.TP 5
 -r
 Force the use of the rand() call, rather than using /dev/random or /dev/urandom. Primarily useful for testing.
 -m
-Generate a random MAC address, e.g. 12:72:e2:b2:62:02
+Generate a random MAC address, e.g. f2:49:b7:31:5f:0d
 .SH EXAMPLES
 
- $ randpass                             # Generate a random password
+.TP 5
+Generate a random password:
+
+ $ randpass                             
  nqkTNY4A"lG)4ss?_%`<YS'Fj:<{sz|%
- $ randpass -n50                        # Generate a 50 char password
+
+.TP 5
+Generate a 50 char password:
+
+ $ randpass -n50                        
  Z$>Fh%Vu%if.O`x[RuzFV?LsirlKA4\zB%5Exq#zyu}f}&|_LS
- $ randpass -n7                         # Generate a 7 char password
+
+.TP 5
+Generate a 7 char password:
+
+ $ randpass -n7                         
  bcXJQ_g
- $ randpass -a                          # Generate an alphanumeric password
+
+.TP 5
+Generate an alphanumeric password:
+
+ $ randpass -a                          
  EXTebO9TEPMh445cAXhgYD3i4ABfV6ES
- $ randpass -an15                       # Generate a 15 char alphanumeric
+
+.TP 5
+Generate a 15 char alphanumeric:
+
+ $ randpass -an15                       
  4qCeooDmF0KjI0I
- $ randpass -m                          # Generate a random MAC address
- 22:0c:0d:0d:03:06
+
+.TP 5
+Generate a random MAC address:
+
+ $ randpass -m                          
+ b2:da:07:23:e3:e3
+
 .SH AUTHOR
 David Griffiths
