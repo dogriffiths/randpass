@@ -49,5 +49,16 @@ testCanGenerateRandomMACAddressWithTheMOption()
   assertTrue "'$P1' is not a valid MAC address" "[[ $P1 =~ ^([0-9a-f]{2}[:-]){5}([0-9a-f]{2})$ ]]"
 }
 
+# Issue #3
+testSometimesNotEveryNumberEndsWith2()
+{
+  export P1=""
+  for i in {-5..0}
+  do
+    P1="$P1$(randpass -m | sed 's/2://g')"
+  done
+  assertTrue "Each number ends with a 2" "echo '$P1' | grep ':'"
+}
+
 # load shunit2
 . shunit2
