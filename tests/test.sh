@@ -53,9 +53,9 @@ testCanGenerateRandomMACAddressWithTheMOption()
 testSometimesNotEveryNumberEndsWith2()
 {
   export P1=""
-  for i in {-5..0}
+  for i in {1..10}
   do
-    P1="$P1$(randpass -m | sed 's/2://g')"
+    P1="$P1$(../src/randpass -m | sed 's/2://g')"
   done
   assertTrue "Each number ends with a 2" "echo '$P1' | grep ':'"
 }
