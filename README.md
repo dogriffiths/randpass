@@ -29,9 +29,9 @@ Options:
     $ randpass -an15                       # Generate a 15 char alphanumeric
     4qCeooDmF0KjI0I
     $ randpass -m                          # Generate a random MAC address
-    52:72:72:f2:d2:a2
+    22:0c:0d:0d:03:06
 
-## Using randpass to disguise your network connection
+## Using randpass to spoof your MAC address
 
 You can use randpass if you want to change your MAC address to a random value. This can be useful if you want to use a public wifi network and don't want leak information about your hardware. This is an example of how to do that on a *nix machine:
 
@@ -44,3 +44,5 @@ Then, change your MAC address using randpass. This command sets the MAC address 
      $ sudo ifconfig en1 ether $(randpass -m)
 
 The en1 connection will typically be your WiFi, but you can check by just typing 'ifconfig'. You will then need to re-connect to the network. The network will treat your machine as a different piece of hardware and allocate you a new IP address. You MAC address will be reset if you reboot.
+
+For more on MAC spoofing see https://en.wikipedia.org/wiki/MAC_spoofing
