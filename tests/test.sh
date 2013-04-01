@@ -60,5 +60,16 @@ testSometimesNotEveryNumberEndsWith2()
   assertTrue "Each number ends with a 2" "echo '$P1' | grep ':'"
 }
 
+# Issue #4
+testSometimesNotEveryNumberBeginsWith0()
+{
+  export P1=""
+  for i in {1..10}
+  do
+    P1="$P1$(../src/randpass -m | sed 's/:0//g')"
+  done
+  assertTrue "Each number begins with a 0" "echo '$P1' | grep ':'"
+}
+
 # load shunit2
 . shunit2
