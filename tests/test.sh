@@ -72,14 +72,14 @@ testSometimesNotEveryNumberBeginsWith0()
 }
 
 # Issue #5
-testSometimesNotEveryNumberEndsWith2()
+testSometimesTheFirstNumberDoesntEndWithA2()
 {
   export P1=""
   for i in {1..10}
   do
     P1="$P1$(../src/randpass -m | cut -c2)"
   done
-  assertTrue "The first number always ends with a 2" "[ $(echo $P1 | sed 's/2//g') == '' ]"
+  assertTrue "The first number always ends with a 2" "[ $(echo $P1 | sed 's/2//g') != '' ]"
 }
 
 # load shunit2
