@@ -54,8 +54,8 @@ void print_mac_address()
   struct timeval t1;
   gettimeofday(&t1, NULL);
   srand(t1.tv_usec * t1.tv_sec);
-  r = rand() % 16;
-  printf("%x2", r);
+  r = rand() % 256;
+  printf("%02x", r);
   for (i = 0; i < 5; i++) {
     r = rand() % 256;
     printf(":%02x", r);
