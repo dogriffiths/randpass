@@ -73,7 +73,6 @@ void print_seq(int char_length, int (*char_maker)(int))
 {
   int random_fd = open(DEVRANDOM, O_RDONLY);
   int i, r;
-  srand(time(NULL));
   for (i = 0; i < char_length; i++)
     if (read(random_fd, &r, sizeof r) != -1)
       printf("%c", char_maker(r));
