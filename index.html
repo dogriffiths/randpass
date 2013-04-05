@@ -46,32 +46,63 @@
 
 
       <section id="main_content">
-        <h3>Welcome to GitHub Pages.</h3>
+        <h3>Welcome to randpass.</h3>
 
-<p>This automatic page generator is the easiest way to create beautiful pages for all of your projects. Author your page content here using GitHub Flavored Markdown, select a template crafted by a designer, and publish. After your page is generated, you can check out the new branch:</p>
+<p>randpass generates a sequence of random characters, suitable for use as a password.</p>
 
-<pre><code>$ cd your_repo_root/repo_name
-$ git fetch origin
-$ git checkout gh-pages
+<p>Options:</p>
+
+<p>-v Display the version number</p>
+
+<p>-h Display help text</p>
+
+<p>-a Restrict the password to alpha-numeric characters</p>
+
+<p>-n<num> Specify the number of characters in the password</p>
+
+<p>-r Force the use of the rand() call, rather than using /dev/random or /dev/urandom. Primarily useful for testing.</p>
+
+<p>-m Generate a random MAC address, e.g. d2:85:e6:6b:3c:d9</p>
+
+<h3>Examples</h3>
+
+<pre><code>$ randpass                             # Generate a random password
+nqkTNY4A"lG)4ss?_%`&lt;YS'Fj:&lt;{sz|%
+$ randpass -n50                        # Generate a 50 char password
+Z$&gt;Fh%Vu%if.O`x[RuzFV?LsirlKA4\zB%5Exq#zyu}f}&amp;|_LS
+$ randpass -n7                         # Generate a 7 char password
+bcXJQ_g
+$ randpass -a                          # Generate an alphanumeric password
+EXTebO9TEPMh445cAXhgYD3i4ABfV6ES
+$ randpass -an15                       # Generate a 15 char alphanumeric
+4qCeooDmF0KjI0I
+$ randpass -m                          # Generate a random MAC address
+72:a8:d6:8c:49:3e
 </code></pre>
 
-<p>If you're using the GitHub for Mac, simply sync your repository and you'll see the new branch.</p>
+<h4>Using randpass to spoof your MAC address</h4>
 
-<h3>Designer Templates</h3>
+<p>You can use randpass if you want to change your MAC address to a random value. This can be useful if you want to use a public wifi network and don't want leak information about your hardware. This is an example of how to do that on a *nix machine:</p>
 
-<p>We've crafted some handsome templates for you to use. Go ahead and continue to layouts to browse through them. You can easily go back to edit your page before publishing. After publishing your page, you can revisit the page generator and switch to another theme. Your Page content will be preserved if it remained markdown format.</p>
+<p>First, close your existing wifi connection. Either do this manually or with a script. On a Mac running Mountain Lion you can use:</p>
 
-<h3>Rather Drive Stick?</h3>
+<pre><code> $ sudo /System/Library/PrivateFrameworks/Apple80211.framework/Versions/A/Resources/airport -z
+</code></pre>
 
-<p>If you prefer to not use the automatic generator, push a branch named <code>gh-pages</code> to your repository to create a page manually. In addition to supporting regular HTML content, GitHub Pages support Jekyll, a simple, blog aware static site generator written by our own Tom Preston-Werner. Jekyll makes it easy to create site-wide headers and footers without having to copy them across every page. It also offers intelligent blog support and other advanced templating features.</p>
+<p>Then, change your MAC address using randpass. This command sets the MAC address of the en1 network connection:</p>
+
+<pre><code> $ sudo ifconfig en1 ether $(randpass -m)
+</code></pre>
+
+<p>The en1 connection will typically be your WiFi, but you can check by just typing 'ifconfig'. You will then need to re-connect to the network. The network will treat your machine as a different piece of hardware and allocate you a new IP address. You MAC address will be reset if you reboot.</p>
+
+<p>For more on MAC spoofing see the page on <a href='https://en.wikipedia.org/wiki/MAC_spoofing'>Wikipedia</a></p>
+
 
 <h3>Authors and Contributors</h3>
 
-<p>You can <a href="https://github.com/blog/821" class="user-mention">@mention</a> a GitHub username to generate a link to their profile. The resulting <code>&lt;a&gt;</code> element will link to the contributor's GitHub Profile. For example: In 2007, Chris Wanstrath (<a href="https://github.com/defunkt" class="user-mention">@defunkt</a>), PJ Hyett (<a href="https://github.com/pjhyett" class="user-mention">@pjhyett</a>), and Tom Preston-Werner (<a href="https://github.com/mojombo" class="user-mention">@mojombo</a>) founded GitHub.</p>
+<p>randpass was created and maintained by <a href="https://github.com/dogriffiths" class="user-mention">@dogriffiths</a>.</p>
 
-<h3>Support or Contact</h3>
-
-<p>Having trouble with Pages? Check out the documentation at <a href="http://help.github.com/pages">http://help.github.com/pages</a> or contact <a href="mailto:support@github.com">support@github.com</a> and we’ll help you sort it out.</p>
       </section>
 
       <footer>
