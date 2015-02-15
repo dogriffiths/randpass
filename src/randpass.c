@@ -10,12 +10,7 @@
 #include "randpass.h"
 #include "../config.h"
 
-#ifdef __APPLE__
-  #define DEVRANDOM "/dev/random"
-#endif
-#ifdef __linux
-  #define DEVRANDOM "/dev/urandom"
-#endif
+#define DEVRANDOM "/dev/urandom"
 
 void usage()
 {
