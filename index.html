@@ -48,7 +48,9 @@
       <section id="main_content">
         <h3>Welcome to randpass.</h3>
 
-<p>randpass generates a sequence of random characters, suitable for use as a password.</p>
+        <p>randpass generates a sequence of random characters, suitable for use as a password. On Linux and Mac platforms it uses <tt>/dev/urandom</tt>
+          to generate randomness. This means that system entropy is used to increase the randomness of the generated result. On other platforms,
+          it falls back to using a system <tt>rand()</tt> call, seeded by the time of day.</p>
 
 <p>Options:</p>
 
